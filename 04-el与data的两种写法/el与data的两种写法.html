@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 准备容器 -->
+    <div id="root">
+        <h1>你好，{{name}}</h1>
+    </div>
+
+    <script>
+        Vue.config.productionTip=false;
+
+        // el的两种写法
+        // 创建Vue实例
+        // const v=new Vue({
+        //     // el:'#root',              第一种写法
+        //     data:{
+        //         name:'ming'
+        //     }
+        // })
+        // //                           第二种写法,相比el指定更加灵活
+        // v.$mount('#root');
+
+
+        // data的两种写法
+        new Vue({
+            el:'#root',
+            // 第一种写法，对象式
+            // data:{
+            //     name:''
+            // }
+
+            // 第二种写法，函数式,用组件时必须使用函数式，由Vue管理的函数，一定不要使用箭头式
+            data:function(){
+                return{
+                    name:''
+                }
+            }
+        })
+    </script>
+</body>
+</html>

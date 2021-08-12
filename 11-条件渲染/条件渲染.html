@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        #demo{
+            width: 200px;
+            height: 300px;
+            border: solid;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        1.v-if：
+            适用于：切换频率较低的场景
+            特点：不展示的DOM元素直接移除
+            注意：v-if可以和v-else-if，v-else一起使用，但要求结构不能被打断
+        2.v-show
+            适用于：切换较为频繁的场景
+            特点：不展示的DOM元素为被移除，而是用样式隐藏
+        3.备注：
+            使用v-if时元素可能无法获取，而使用v-show一定可以获取
+     -->
+    <div id="root">
+        <div id="demo">
+            <!-- 使用v-show做条件渲染 -->
+            <h2 v-show="ifShow" @click="ifShow=!ifShow">模板1</h2>
+    
+            <!-- 使用v-if做条件渲染 -->
+            <h2 v-if="n===1" @click="n++">模板2,点击切换</h2>
+            <h2 v-else-if="n===2" @click="n++">模板3,点击切换</h2>
+            <h2 v-else-if="n===3" >模板4</h2>
+
+            <!-- v-if和template -->
+            <template v-if="n===2">
+                <h2>模板3.2</h2>
+                <h2>模板3.3</h2>
+                <h2>模板3.4</h2>
+            </template>
+        </div>
+    </div>
+    <script>
+        Vue.config.productionTip = false;
+
+        new Vue({
+            el:'#root',
+            data:{
+               ifShow:true,
+                n:1
+            }
+        })
+    </script>
+</body>
+</html>

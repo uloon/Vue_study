@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        插值语法:
+            标签体内用
+            {{xxx}}
+        指令语法:
+            用于解析标签（包括标签属性，标签体内容，绑定事件...）
+            举例：v-bind:herf='xxx'或简写为:herf='xxx'
+            备注：Vue中有很多指令，且形式都是v-xxx
+     -->
+
+
+    <!-- 准备容器 -->
+    <div id="root">
+        <h1>插值语法</h1>
+        <h3>你好，{{name}}</h3>
+        <hr>
+        <h1>指令语法</h1>
+        <a v-bind:href='school.url'>点我去{{school.name}}</a>
+        <!-- v-bind:可以简写成: -->
+
+    </div>
+
+    <script>
+        Vue.config.productionTip=false;//阻止Vue在启动时生成提示
+
+        new Vue({
+            el:'#root',
+            data:{
+                name:'插值',
+                school:{
+                    url:"http://www.atguigu.com",
+                    name:'尚硅谷'
+                }
+                
+            }
+        });
+    </script>
+</body>
+</html>

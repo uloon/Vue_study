@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        计算属性vs侦听（监视）属性
+            1.计算属性能完成的，监视属性都能完成
+            2.监视属性能完成的计算属性不一定能完成，如watch可以进行异步操作
+        两个重要原则：
+            1.所有被Vue管理的函数，最好写成普通函数，这样this的指向才是vm或组件实例对象
+            2.所有不被Vue管理的函数（定时器回调函数，ajax回调函数，promise的回调函数）最好写成箭头函数
+                这样this的指向才是vm或组件实例对象            
+     -->
+    <!-- 准备容器 -->
+    <div id="root">
+        姓：<input type="text" v-model='firstName'><br>
+        名：<input type="text" v-model='lastName'><br>
+        <!-- 要求：姓只取前三位 -->
+        全名：<span>{{fullName}}</span>
+    </div>
+    <script>
+        Vue.config.productionTip=false;
+
+        const vm=new Vue({
+            el:'#root',
+            data:{
+                firstName:'张',
+                lastName:'三',
+                fullName:'张-三'
+            },  
+            
+            watch:{
+                firstName:{
+                    handler(newValue){
+                        this.fullName=newValue.slice(0,3)+'-'+this.lastName;
+                    }
+                },
+                lastName:{
+                    handler(newValue){
+                        this.fullName=this.firstName+'-'+newValue;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
