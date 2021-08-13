@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueApp</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <h2>当前的n值是：{{n}}</h2>
+        <button @click="add">n+1</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false;//防止启动Vue时产生生产提示
+        //创建vm对象
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                n:1
+            },
+            methods: {
+                add(){
+                    this.n++;
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate()');
+                console.log(this.n);//undefined
+
+            },
+            created() {
+                console.log('created()')
+                console.log(this.n);//1
+            },
+            beforeMount() {
+                console.log('beforeMount()')
+                console.log(this.n);//1
+            },
+            mounted() {
+                console.log('mounted()')
+                console.log(this.n);//1
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueApp</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <!-- 
+            v-pre:
+                1.跳过所在节点的编译过程
+                2.可利用他跳过：没有使用指令语法、插值语法的节点，加快编译
+         -->
+         <h2 v-pre>这是标题</h2>
+        <h2 v-pre>初始化的n值是:{{n}}</h2>
+        <h2>当前的n值是：{{n}}</h2>
+        <button @click="n++">点我n+1</button>
+    </div>
+    <script>
+        Vue.config.productionTip = false;//防止启动Vue时产生生产提示
+        //创建vm对象
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                n:1
+            },
+        });
+    </script>
+</body>
+
+</html>

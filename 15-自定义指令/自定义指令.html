@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueApp</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        1.v-big:把绑定的值放大10倍
+        2.v-fbind：和v-bind相似，可以让其所绑定的input元素默认获取焦点
+
+        定义语法：
+            1.局部指令：
+                如本示例所示
+            2.全局指令
+                Vue.directive(指令名,配置对象)或Vue.directive(指令名,回调函数)
+        
+        配置对象中常用的三个回调函数：
+            1.bind(),指令与元素成功绑定时调用
+            2.inserted(),指令所在元素被插入页面时调用
+            3.update(),指令所在的模板被重新解析时调用
+     -->
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <h2>当前的n值是：<span v-text="n"></span></h2>
+        <h2>放大十倍后的n值是：<span v-big="n"></span></h2>
+        <button @click="n++">n+1</button>
+        <hr>
+        <input type="text" v-fbind:value="n">
+    </div>
+    <script>
+        Vue.config.productionTip = false;//防止启动Vue时产生生产提示
+        //创建vm对象
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                n:1
+            },
+            directives:{
+                /*
+                    注：
+                        若指令名包含-,则在创建指令时需要给指令名加上""
+                
+                */
+                // 局部指令第一种写法，写起来简单
+                /*
+                    big函数合适会被调用？
+                        1.指令与元素成功绑定时
+                        2.指令所在的模板被重新解析时
+                */
+                big(element,binding){
+                    element.innerText=binding.value*10;
+                },
+
+                // 局部指令第二种写法,可以处理细节上的问题
+                fbind:{
+                    // 指令与元素成功绑定时调用
+                    bind(element,binding){
+                        element.value=binding.value
+                    },
+                    // 指令所在元素被插入页面时调用
+                    inserted(element,binding){
+                        element.focus();
+                    },
+                    // 指令所在的模板被重新解析时调用
+                    update(element,binding){
+                        element.value=binding.value;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

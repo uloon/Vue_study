@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueApp</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <!-- 
+            v-cloak指令(没有值)：
+                1.本质是一个特殊属性，Vue实例创建完毕并接管容器后，会删掉c-cloak属性
+                2.配合css可以解决网速慢时，页面展示出现为渲染的插值语法{{xxx}}的问题
+         -->
+        <h2 v-cloak>{{name}}</h2>
+    </div>
+    <script src="../js/vue.js"></script>
+    
+</body>
+
+<script>
+    Vue.config.productionTip = false;//防止启动Vue时产生生产提示
+    //创建vm对象
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            name:'try'
+        },
+        
+    });
+</script>
+
+</html>
