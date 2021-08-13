@@ -10,6 +10,20 @@
 </head>
 
 <body>
+    <!-- 
+        vm的生命周期：
+            将要创建==>调用beforeCreate函数
+            创建完毕==>调用created函数
+
+            将要挂载==>调用beforeMounted函数
+    （重要）挂载完毕==>调用mounted函数（初始化的事在这）
+
+            将要更新==>调用beforeUpdate函数
+            更新完毕==>调用updated函数
+
+    （重要）将要销毁==>调用beforeDestory函数（收尾的事在这）
+            销毁完毕==>调用destoryed函数
+     -->
     <!-- 准备一个容器 -->
     <div id="root">
         <h2>当前的n值是：{{n}}</h2>
@@ -44,6 +58,19 @@
             mounted() {
                 console.log('mounted()')
                 console.log(this.n);//1
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate()')
+            },
+            updated() {
+                console.log('Update()')
+            },
+            //  调用vm.$destroy()销毁vm
+            beforeDestroy() {
+                console.log('beforeDestroy()')
+            },
+            destroyed() {
+                console.log('destroy()')
             },
         });
     </script>
