@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueApp</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <!-- 4.3使用app组件 -->
+        <app></app>
+    </div>
+</body>
+
+<script>
+    Vue.config.productionTip = false;//防止启动Vue时产生生产提示
+
+    // 2.1定义学生组件
+    const student=Vue.extend({
+        template:`
+            <div>
+                <h2>学生姓名：{{stuName}}</h2>
+                <h2>年龄：{{age}}</h2>
+            </div>
+        `,
+        data(){
+            return{
+                stuName:'东方丈助',
+                age:'18'
+            }
+        }
+    }) 
+
+    // 1.1定义学校组件
+    const school=Vue.extend({
+        // 2.3在school组件内使用student组件
+        template:`
+            <div>
+                <h2>学校名称：{{schoolName}}</h2>
+                <h2>学校地址：{{address}}</h2>
+                <student></student>
+            </div>
+        `,
+        data(){
+            return{
+                schoolName:'杜王町大学',
+                address:'杜王町38号'
+            }
+        },
+        components:{
+            // 2.2在学校组件内部注册学生组件(若组件名和定义时的组件名一样则可以简写)
+            student
+        }
+    })
+
+    // 3.1定义hello组件
+    const hello=Vue.extend({
+        template:`
+            <h2>{{str}}</h2>
+        `,
+        data(){
+            return{
+                str:'欢迎来到杜王町'
+            }
+        }
+    })
+
+    // 4.1定义app组件
+    const app=Vue.extend({
+        template:`
+        <div>
+            <hello></hello>
+            <school></school>
+        </div>
+        `,
+        components:{
+            // 1.2注册学校组件
+            school:school,
+            // 3.2注册hello组件
+            hello
+        }
+    })
+
+
+    
+    //创建vm对象
+    const vm = new Vue({
+        el: "#root",  
+        components:{
+            // 4.2注册app组件
+            app
+        }
+    });
+</script>
+
+</html>
